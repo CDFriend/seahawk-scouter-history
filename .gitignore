@@ -1,0 +1,9 @@
+.DS_Store
+
+# Python files 
+venv/
+__pycache__
+
+# IntelliJ (PyCharm)
+.idea
+

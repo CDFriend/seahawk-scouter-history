@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <table>
+            <tr>
+                <th>Team ID</th>
+                <th>Color</th>
+                <th>Autonomous Score</th>
+                <th>Driver Score</th>
+                <th>Tournament ID</th>
+            </tr>
+
+            {% for match in matches %}
+            <tr>
+                <td>{{match.team_id}}</td>
+                <td>{{match.color}}</td>
+                <td>{{match.auton_score}}</td>
+                <td>{{match.driver_score}}</td>
+                <td>{{match.tournament_id}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </body>
+</html>

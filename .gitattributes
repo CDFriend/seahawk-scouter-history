@@ -1,0 +1,8 @@
+# Binary files
+*.svg         -diff
+*.woff        -diff
+*.woff2       -diff
+*.ttf         -diff
+*.min.js      -diff
+*.min.css     -diff
+*.min.css.map -diff

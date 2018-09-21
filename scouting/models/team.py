@@ -8,7 +8,7 @@ class Team:
         self.program       = str(result["program"])
         self.team_name     = str(result["team_name"])
         self.robot_name    = str(result["robot_name"])
-        self.organisation  = str(result["organisation"])
+        self.organization  = str(result["organisation"])
         self.city          = str(result["city"])
         self.region        = str(result["region"])
         self.country       = str(result["country"])

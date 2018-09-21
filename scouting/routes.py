@@ -16,3 +16,4 @@ def match_list():
 
 def register_routes(app):
     app.add_url_rule('/', 'teams', team_list)
+    app.add_url_rule('/matches', 'matches', match_list)

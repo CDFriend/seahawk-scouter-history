@@ -1,32 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Team Rankings</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+<h1>Team Rankings</h1>
 
-    <h1>Team Rankings</h1>
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Organization</th>
+        <th>Location</th>
+    </tr>
 
-    <table>
-        <tr>
-            <th>Rank</th>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Organization</th>
-            <th>Location</th>
-        </tr>
-
-        {% for team in teams %}
-        <tr>
-            <td>{{loop.index}}</td>
-            <td>{{team.id}}</td>
-            <td>{{team.team_name}}</td>
-            <td>{{team.organization}}</td>
-            <td>{{team.get_location_str()}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
-</body>
-</html>
+    {% for team in teams %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{team.id}}</td>
+        <td>{{team.team_name}}</td>
+        <td>{{team.organization}}</td>
+        <td>{{team.get_location_str()}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

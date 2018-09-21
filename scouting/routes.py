@@ -4,7 +4,7 @@ from scouting.db import get_firebase
 
 def home():
     matches = get_firebase().get_all_matches()
-    return render_template('team_list.html', matches=matches)
+    return render_template('match_list.html', matches=matches)
 
 
 def register_routes(app):

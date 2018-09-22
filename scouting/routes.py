@@ -1,6 +1,10 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 from scouting.db import get_firebase
 from scouting.api.vexdb import get_vexdb, VexDbDummy
+
+
+def home():
+    return redirect(url_for('teams'))
 
 
 def team_list():
@@ -15,5 +19,6 @@ def match_list():
 
 
 def register_routes(app):
-    app.add_url_rule('/', 'teams', team_list)
+    app.add_url_rule('/', 'home', home)
+    app.add_url_rule('/teams', 'teams', team_list)
     app.add_url_rule('/matches', 'matches', match_list)

@@ -21,5 +21,17 @@
     <p class="lead">
         {{ team.organization }} | {{ team.get_location_str() }}
     </p>
+
+    {% block stats %}
+    <div class="row">
+        <div class="col-sm-6">
+            <b>Scouting rank: </b>
+        </div>
+        <div class="col-sm-6">
+            <b>World rank: </b>
+        </div>
+    </div>
+    {% endblock %}
+
 </div>
 {% endblock %}

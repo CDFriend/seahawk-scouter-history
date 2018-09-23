@@ -5,4 +5,4 @@
 *.ttf         -diff
 *.min.js      -diff
 *.min.css     -diff
-*.min.css.map -diff
+*.map         -diff

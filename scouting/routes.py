@@ -13,6 +13,11 @@ def team_list():
     return render_template('team_rankings.html', teams=teams)
 
 
+def team_info(team_id):
+    team = get_vexdb().get_team_by_id(team_id)
+    return render_template('team_info.html', team=team)
+
+
 def match_list():
     matches = get_firebase().get_all_matches()
     return render_template('match_list.html', matches=matches)
@@ -21,4 +26,5 @@ def match_list():
 def register_routes(app):
     app.add_url_rule('/', 'home', home)
     app.add_url_rule('/teams', 'teams', team_list)
+    app.add_url_rule('/teams/<team_id>', 'team_info', team_info)
     app.add_url_rule('/matches', 'matches', match_list)

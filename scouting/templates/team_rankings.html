@@ -16,7 +16,7 @@
     {% for team in teams %}
     <tr>
         <td>{{loop.index}}</td>
-        <td>{{team.id}}</td>
+        <td><a href="/teams/{{team.id}}">{{team.id}}</a></td>
         <td>{{team.team_name}}</td>
         <td>{{team.organization}}</td>
         <td>{{team.get_location_str()}}</td>

@@ -1,6 +1,8 @@
-from flask import render_template, redirect, url_for
+from flask import *
+
 from scouting.db import get_firebase
-from scouting.api.vexdb import get_vexdb, VexDbDummy
+from scouting.api.vexdb import *
+from scouting.models.team import validate_team_id
 
 
 def home():
@@ -14,7 +16,15 @@ def team_list():
 
 
 def team_info(team_id):
-    team = get_vexdb().get_team_by_id(team_id)
+    # Sanitize team ID string (prevents URL injection)
+    if not validate_team_id(team_id):
+        abort(404)
+
+    try:
+        team = get_vexdb().get_team_by_id(team_id)
+    except CouldNotFindError:
+        abort(404)
+        return
     return render_template('team_info.html', team=team)
 
 

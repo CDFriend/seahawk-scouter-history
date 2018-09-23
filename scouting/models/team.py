@@ -1,3 +1,11 @@
+import re
+
+
+def validate_team_id(team_id):
+    """Checks whether or not a team ID string is valid."""
+    return re.match("^[A-Za-z]+\d+$", team_id) is not None
+
+
 class Team:
     def __init__(self, **kwargs):
         self.id            = str(kwargs["number"])

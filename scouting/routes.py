@@ -30,11 +30,9 @@ def team_info(team_id):
 
 def event_list():
     events = get_db().get_all_events()
-    print(events)
 
     vexdb = get_vexdb()
     event_data = [vexdb.get_event_by_sku(sku) for sku in events]
-    print(event_data)
     return render_template('event_list.html', events=event_data)
 
 

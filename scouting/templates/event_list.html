@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+<h1 class="mb-4">Scouted Events</h1>
+
+<table class="table table-hover">
+    <tr>
+        <th>SKU</th>
+        <th>Name</th>
+        <th>Location</th>
+    </tr>
+
+    {% for event in events %}
+    <tr>
+        <td>{{event.sku}}</td>
+        <td>{{event.name}}</td>
+        <td>{{event.get_location_str()}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 {
   "teams": {
     "9181A": {
-      "events": [2912],
+      "events": ["RE-VRC-18-5261"],
       "data": {
         "auton_point_percent": 100.0,
         "best_score": 22,
@@ -11,7 +11,7 @@
     }
   },
   "events": {
-    "2912": {
+    "RE-VRC-18-5261": {
       "matches": [1, 2]
     }
   },

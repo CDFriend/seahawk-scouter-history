@@ -1,4 +1,5 @@
 import re
+from scouting.utils import get_location_str
 
 
 def validate_team_id(team_id):
@@ -20,7 +21,4 @@ class Team:
         self.is_registered = bool(kwargs["is_registered"])
 
     def get_location_str(self):
-        if not (self.city or self.region or self.country):
-            return "Unknown"
-
-        return ", ".join([self.city, self.region, self.country])
+        return get_location_str(self.city, self.region, self.country)

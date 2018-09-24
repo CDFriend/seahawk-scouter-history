@@ -10,8 +10,8 @@ def home():
 
 
 def team_list():
-    vexdb = get_vexdb()
-    teams = [vexdb.get_team_by_id(id) for id in VexDbDummy.team_data.keys()]
+    scouted_teams = get_db().get_scouted_teams()
+    teams = [get_vexdb().get_team_by_id(team) for team in scouted_teams]
     return render_template('team_rankings.html', teams=teams)
 
 
@@ -28,13 +28,18 @@ def team_info(team_id):
     return render_template('team_info.html', team=team)
 
 
-def match_list():
-    matches = get_db().get_all_matches()
-    return render_template('match_list.html', matches=matches)
+def event_list():
+    events = get_db().get_all_events()
+    print(events)
+
+    vexdb = get_vexdb()
+    event_data = [vexdb.get_event_by_sku(sku) for sku in events]
+    print(event_data)
+    return render_template('event_list.html', events=event_data)
 
 
 def register_routes(app):
     app.add_url_rule('/', 'home', home)
     app.add_url_rule('/teams', 'teams', team_list)
     app.add_url_rule('/teams/<team_id>', 'team_info', team_info)
-    app.add_url_rule('/matches', 'matches', match_list)
+    app.add_url_rule('/events', 'events', event_list)

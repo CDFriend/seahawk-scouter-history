@@ -1,11 +1,12 @@
 import requests
 from flask import g
 from scouting.models.team import Team
+from scouting.models.event import Event
 
 
 def get_vexdb():
     if "vexdb" not in g:
-        g.vexdb = VexDbDummy()
+        g.vexdb = VexDb()
     return g.vexdb
 
 
@@ -25,25 +26,10 @@ class VexDb:
         result = resp["result"][0]
         return Team(**result)
 
-
-class VexDbDummy:
-    """Mock VexDb interface for testing."""
-    def get_team_by_id(self, team_num):
-        if team_num not in self.team_data:
+    def get_event_by_sku(self, sku):
+        resp = requests.get("%s/get_events?sku=%s" % (self.api_url, sku)).json()
+        if resp["size"] <= 0:
             raise CouldNotFindError()
-        return Team(**self.team_data[team_num])
+        result = resp["result"][0]
+        return Event(**result)
 
-    team_data = {
-        "9181A": {
-            "number": "9181A",
-            "program": "VEX Robotics Competition",
-            "team_name": "Rainbow Fabricators",
-            "robot_name": "Bill",
-            "organisation": "Seaquam Secondary",
-            "city": "Delta",
-            "region": "British Columbia",
-            "country": "Canada",
-            "grade": "Middle/High School",
-            "is_registered": True
-        }
-    }

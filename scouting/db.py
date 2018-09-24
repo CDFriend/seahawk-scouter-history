@@ -9,7 +9,18 @@ class Db:
     def __init__(self):
         self._firebase = Client()
 
+    def get_scouted_teams(self):
+        """Get the team IDs of all teams we've scouted."""
+        docs = self._firebase.collection("teams").get()
+        return [doc.id for doc in docs]
+
+    def get_all_events(self):
+        """Get the SKUs of all events we've scouted."""
+        docs = self._firebase.collection("events").get()
+        return [doc.id for doc in docs]
+
     def get_all_matches(self):
+        """Get data from ALL scouted matches."""
         docs = self._firebase.collection("matches_scouting").get()
         return [ScoutingMatch(**doc.to_dict()) for doc in docs]
 

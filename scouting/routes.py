@@ -1,6 +1,6 @@
 from flask import *
 
-from scouting.db import get_firebase
+from scouting.db import get_db
 from scouting.api.vexdb import *
 from scouting.models.team import validate_team_id
 
@@ -29,7 +29,7 @@ def team_info(team_id):
 
 
 def match_list():
-    matches = get_firebase().get_all_matches()
+    matches = get_db().get_all_matches()
     return render_template('match_list.html', matches=matches)
 
 

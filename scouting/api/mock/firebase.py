@@ -1,30 +1,46 @@
-from scouting.models.scouting_match import ScoutingMatch
+import json
+from pathlib import Path
+from google.cloud.exceptions import *
+
+MOCK_DATA_PATH = Path(__file__).parent.joinpath("mock_data_firebase.json")
 
 
-class Firebase:
-    def get_all_matches(self):
-        return [ScoutingMatch(**data) for key, data in self.mock_matches_.items()]
+class Client:
+    """Dummy firebase client for testing. Mirrors the google-cloud-firebase
+    python package API.
+    """
+    def __init__(self):
+        self._data = json.load(open(MOCK_DATA_PATH, 'r'))
 
-    mock_matches_ = {
-        1: {
-            "team_name": "9181A",
-            "color": "red",
-            "auton_score": 5,
-            "driver_score": 17,
-            "tournament_id": 2912
-        },
-        2: {
-            "team_name": "9181Z",
-            "color": "blue",
-            "auton_score": 4,
-            "driver_score": 12,
-            "tournament_id": 2912
-        },
-        3: {
-            "team_name": "1010Q",
-            "color": "red",
-            "auton_score": 7,
-            "driver_score": 15,
-            "tournament_id": 2912
-        }
-    }
+    def collection(self, name):
+        if name in self._data:
+            return _Collection(self._data[name])
+        else:
+            raise NotFound
+
+
+class _Collection:
+    def __init__(self, data):
+        self._data = data
+
+    def document(self, name):
+        """Get a document in the collection. Throw an exception if it doesn't
+        exist.
+        """
+        if name in self._data:
+            return _Document(name, self._data[name])
+        else:
+            raise NotFound
+
+    def get(self):
+        """Get all documents in the collection."""
+        return [_Document(key, val) for key, val in self._data.items()]
+
+
+class _Document:
+    def __init__(self, id, data):
+        self.id = id
+        self._data = data
+
+    def to_dict(self):
+        return self._data

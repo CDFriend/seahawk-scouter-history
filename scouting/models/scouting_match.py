@@ -1,6 +1,6 @@
 class ScoutingMatch:
     def __init__(self, **kwargs):
-        self.team_id = str(kwargs["team_name"])
+        self.team_id = str(kwargs["team_id"])
         self.color = str(kwargs["color"]).upper()
         self.auton_score = int(kwargs["auton_score"])
         self.driver_score = int(kwargs["driver_score"])

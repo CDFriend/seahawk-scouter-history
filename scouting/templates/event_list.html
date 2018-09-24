@@ -10,6 +10,7 @@
         <th>SKU</th>
         <th>Name</th>
         <th>Location</th>
+        <th>Date</th>
     </tr>
 
     {% for event in events %}
@@ -17,6 +18,7 @@
         <td>{{event.sku}}</td>
         <td>{{event.name}}</td>
         <td>{{event.get_location_str()}}</td>
+        <td>{{event.get_date_str()}}</td>
     </tr>
     {% endfor %}
 </table>

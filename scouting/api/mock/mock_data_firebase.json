@@ -21,7 +21,7 @@
       "color": "RED",
       "auton_score": 7,
       "driver_score": 15,
-      "tournament_id": 2912,
+      "tournament_sku": "RE-VRC-18-5261",
       "auton_bonus": true
     },
     "2": {
@@ -29,7 +29,7 @@
       "color": "BLUE",
       "auton_score": 9,
       "driver_score": 12,
-      "tournament_id": 2912,
+      "tournament_sku": "RE-VRC-18-5261",
       "auton_bonus": true
     }
   }

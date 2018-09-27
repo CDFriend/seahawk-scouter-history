@@ -36,8 +36,16 @@ def event_list():
     return render_template('event_list.html', events=event_data)
 
 
+def event_info(event_sku):
+    # TODO: sanitize SKU
+    event = get_vexdb().get_event_by_sku(event_sku)
+    matches = get_db().get_matches_for_event_id(event_sku)
+    return render_template('event_info.html', event=event, matches=matches)
+
+
 def register_routes(app):
     app.add_url_rule('/', 'home', home)
     app.add_url_rule('/teams', 'teams', team_list)
     app.add_url_rule('/teams/<team_id>', 'team_info', team_info)
     app.add_url_rule('/events', 'events', event_list)
+    app.add_url_rule('/events/<event_sku>', 'event_info', event_info)

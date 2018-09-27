@@ -24,6 +24,12 @@ class Db:
         docs = self._firebase.collection("matches_scouting").get()
         return [ScoutingMatch(**doc.to_dict()) for doc in docs]
 
+    def get_matches_for_event_id(self, id):
+        """Get match data for a given tournament ID."""
+        docs = self._firebase.collection("matches_scouting")\
+                .where("tournament_sku", "==", id)
+        return [ScoutingMatch(**doc.to_dict()) for doc in docs]
+
 
 def get_db():
     if 'db' not in g:

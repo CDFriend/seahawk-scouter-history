@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="mb-4">{{ event.name }}</h1>
+
+    <h2>Scouted Matches</h2>
+    <table class="table table-condensed table-hover">
+        <tr>
+            <th>Team</th>
+            <th>Color</th>
+            <th>Autonomous Score</th>
+            <th>Driver Score</th>
+        </tr>
+
+        {% for match in matches %}
+        <tr>
+            <td>{{match.team_id}}</td>
+            <td>{{match.color}}</td>
+            <td>{{match.auton_score}}</td>
+            <td>{{match.driver_score}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

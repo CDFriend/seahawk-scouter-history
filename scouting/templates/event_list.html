@@ -15,7 +15,7 @@
 
     {% for event in events %}
     <tr>
-        <td>{{event.sku}}</td>
+        <td><a href="/events/{{event.sku}}">{{event.sku}}</a></td>
         <td>{{event.name}}</td>
         <td>{{event.get_location_str()}}</td>
         <td>{{event.get_date_str()}}</td>

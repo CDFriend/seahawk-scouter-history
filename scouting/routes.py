@@ -39,8 +39,13 @@ def event_list():
 def event_info(event_sku):
     # TODO: sanitize SKU
     event = get_vexdb().get_event_by_sku(event_sku)
-    matches = get_db().get_matches_for_event_id(event_sku)
-    return render_template('event_info.html', event=event, matches=matches)
+    vexdb_matches = get_vexdb().get_matches_for_event(event_sku)
+    scouting_matches = get_db().get_matches_for_event_id(event_sku)
+
+    return render_template('event_info.html',
+                           event=event,
+                           vexdb_matches=vexdb_matches,
+                           scouting_matches=scouting_matches)
 
 
 def register_routes(app):

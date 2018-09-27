@@ -1,7 +1,9 @@
 import requests
 from flask import g
+
 from scouting.models.team import Team
 from scouting.models.event import Event
+from scouting.models.vexdb_match import VexdbMatch
 
 
 def get_vexdb():
@@ -33,3 +35,8 @@ class VexDb:
         result = resp["result"][0]
         return Event(**result)
 
+    def get_matches_for_event(self, sku):
+        resp = requests.get("%s/get_matches?sku=%s" % (self.api_url, sku)).json()
+        if resp["size"] <= 0:
+            return []
+        return [VexdbMatch(**match_info) for match_info in resp["result"] if match_info["scored"]]

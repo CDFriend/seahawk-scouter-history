@@ -11,7 +11,7 @@ def home():
 
 def team_list():
     scouted_teams = get_db().get_scouted_teams()
-    teams = [get_vexdb().get_team_by_id(team) for team in scouted_teams]
+    teams = get_vexdb().get_teams_by_id(scouted_teams)
     return render_template('team_rankings.html', teams=teams)
 
 

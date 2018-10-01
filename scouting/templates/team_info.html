@@ -1,15 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<style>
-    h1.team-name {
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    }
-
-    small.team-id {
-        font-size: 75%;
-    }
-</style>
 
 <div class="container">
     <h1 class="team-name">
@@ -24,13 +15,84 @@
 
     {% block stats %}
     <div class="row">
-        <div class="col-sm-6">
-            <b>Scouting rank: </b>
+
+        <div class="col-md-6">
+            <table class="stats">
+                <tr>
+                    <th colspan="2">Stats</th>
+                </tr>
+                <tr>
+                    <th>Average Score:</th>
+                    <td>??</td>
+                </tr>
+                <tr>
+                    <th>Best Score:</th>
+                    <td>??</td>
+                </tr>
+                <tr>
+                    <th>Worst Score:</th>
+                    <td>??</td>
+                </tr>
+                <tr>
+                    <th>Autonomous Wins:</th>
+                    <td>??</td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-6">
-            <b>World rank: </b>
+
+        <div class="col-md-6">
+            <table class="stats">
+                <tr>
+                    <th colspan="2">Rankings</th>
+                </tr>
+                <tr>
+                    <th>Scouting Rank:</th>
+                    <td>??</td>
+                </tr>
+                <tr>
+                    <th>World Rank:</th>
+                    <td>??</td>
+                </tr>
+                <tr>
+                    <th>Skills Rank:</th>
+                    <td>??</td>
+                </tr>
+            </table>
         </div>
+
     </div>
+    {% endblock %}
+
+    <hr/>
+
+    {% block events %}
+    <h2>Events</h2>
+
+    {% for event in events %}
+    <table class="table table-condensed table-hover">
+        <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Date</th>
+        </tr>
+
+        <tr>
+            <td><a href="/events/{{event.sku}}">{{event.sku}}</a></td>
+            <td>{{event.name}}</td>
+            <td>{{event.get_location_str()}}</td>
+            <td>{{event.get_date_str()}}</td>
+            <!-- TODO: avg, best score -->
+        </tr>
+    </table>
+    {% endfor %}
+
+    <hr/>
+    {% endblock %}
+
+    {% block matches %}
+    <h2>Scouted Matches</h2>
+
     {% endblock %}
 
 </div>

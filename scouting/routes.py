@@ -25,7 +25,12 @@ def team_info(team_id):
     except CouldNotFindError:
         abort(404)
         return
-    return render_template('team_info.html', team=team)
+
+    # TODO: aiohttp-ize this
+    event_skus = get_db().get_events_for_team(team_id)
+    events = [get_vexdb().get_event_by_sku(sku) for sku in event_skus]
+
+    return render_template('team_info.html', team=team, events=events)
 
 
 def event_list():

@@ -73,27 +73,18 @@
         <tr>
             <th>SKU</th>
             <th>Name</th>
-            <th>Location</th>
-            <th>Date</th>
+            <th>Best/Worst/Avg</th>
+            <th>Rank</th>
         </tr>
 
         <tr>
             <td><a href="/events/{{event.sku}}">{{event.sku}}</a></td>
             <td>{{event.name}}</td>
-            <td>{{event.get_location_str()}}</td>
-            <td>{{event.get_date_str()}}</td>
-            <!-- TODO: avg, best score -->
+            <td>??</td>
+            <td>??</td>
         </tr>
     </table>
     {% endfor %}
-
-    <hr/>
     {% endblock %}
-
-    {% block matches %}
-    <h2>Scouted Matches</h2>
-
-    {% endblock %}
-
 </div>
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="mb-4">Upload Data</h1>
+
+    <form method="post">
+
+        <input type="file" class="form-control-file mb-3"/>
+
+        <label for="username">Username: </label>
+        <input id="username" name="username" class="form-control" type="text"/>
+
+        <label for="password">Password: </label>
+        <input id="password" name="password" class="form-control" type="password"/>
+
+        <button type="submit" class="btn btn-primary mt-3">Upload</button>
+    </form>
+</div>
+
+{% endblock %}

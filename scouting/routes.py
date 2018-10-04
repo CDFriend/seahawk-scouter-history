@@ -53,9 +53,14 @@ def event_info(event_sku):
                            scouting_matches=scouting_matches)
 
 
+def upload_data():
+    return render_template('upload_data.html')
+
+
 def register_routes(app):
     app.add_url_rule('/', 'home', home)
     app.add_url_rule('/teams', 'teams', team_list)
     app.add_url_rule('/teams/<team_id>', 'team_info', team_info)
     app.add_url_rule('/events', 'events', event_list)
     app.add_url_rule('/events/<event_sku>', 'event_info', event_info)
+    app.add_url_rule('/upload_data', 'upload', upload_data, methods=['GET', 'POST'])

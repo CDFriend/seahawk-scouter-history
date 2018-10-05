@@ -1,18 +1,10 @@
 {
   "teams": {
     "9181A": {
-      "events": ["RE-VRC-18-5067"],
-      "data": {
-        "auton_point_percent": 100.0,
-        "best_score": 22,
-        "worst_score": 21,
-        "avg_score": 21.5
-      }
-    }
-  },
-  "events": {
-    "RE-VRC-18-5067": {
-      "matches": [1, 2]
+      "auton_point_percent": 100.0,
+      "best_score": 22,
+      "worst_score": 21,
+      "avg_score": 21.5
     }
   },
   "matches_scouting": {

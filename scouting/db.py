@@ -16,8 +16,8 @@ class Db:
 
     def get_events_for_team(self, team_id):
         """Get the SKUs of all events a team attended (or was scouted at)."""
-        team_doc = self._firebase.collection("teams").document(team_id).to_dict()
-        return team_doc["events"]
+        docs = self._firebase.collection("events").where("team_id", "==", team_id)
+        return [doc.id for doc in docs]
 
     def get_all_events(self):
         """Get the SKUs of all events we've scouted."""

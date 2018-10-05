@@ -54,6 +54,9 @@ def event_info(event_sku):
 
 
 def upload_data():
+    if request.method == "POST":
+        print(request.files["dataFile"].read())
+
     return render_template('upload_data.html')
 
 

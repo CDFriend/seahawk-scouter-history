@@ -5,9 +5,9 @@
 <div class="container">
     <h1 class="mb-4">Upload Data</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
-        <input type="file" class="form-control-file mb-3"/>
+        <input type="file" name="dataFile" class="form-control-file mb-3"/>
 
         <label for="username">Username: </label>
         <input id="username" name="username" class="form-control" type="text"/>

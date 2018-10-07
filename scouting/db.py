@@ -3,6 +3,7 @@ from flask import g
 # TODO: get actual firebase impl going
 from scouting.api.mock.firebase import Client
 from scouting.models.scouting_match import ScoutingMatch
+from scouting.models.transaction import ScoutingTransaction
 
 
 class Db:
@@ -34,6 +35,10 @@ class Db:
         docs = self._firebase.collection("matches_scouting")\
                 .where("tournament_sku", "==", id)
         return [ScoutingMatch(**doc.to_dict()) for doc in docs]
+
+    def commit_transaction(self, trans: ScoutingTransaction):
+        for match in trans.matches:
+            self._firebase.collection("matches_scouting").add(match.to_dict())
 
 
 def get_db():

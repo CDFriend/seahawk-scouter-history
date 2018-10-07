@@ -1,4 +1,5 @@
 import json
+import uuid
 from pathlib import Path
 from google.cloud.exceptions import *
 
@@ -32,13 +33,13 @@ class _Collection:
         exist.
         """
         if name in self._data:
-            return _Document(name, self._data[name])
+            return _Document(name, self._data[name], self)
         else:
-            raise NotFound
+            return _Document(name, None, self)
 
     def get(self):
         """Get all documents in the collection."""
-        return [_Document(key, val) for key, val in self._data.items()]
+        return [_Document(key, val, self) for key, val in self._data.items()]
 
     def where(self, field, operator, value):
         documents = self._data.items()
@@ -47,11 +48,23 @@ class _Collection:
         else:
             raise NotSupported()
 
+    def add(self, doc):
+        """Add a document with a randomly-generated ID to the collection."""
+        self.document(uuid.uuid1()).set(doc)
+
+    def _set_key_val(self, key, val):
+        self._data[key] = val
+
 
 class _Document:
-    def __init__(self, id, data):
+    def __init__(self, id, data, collection):
         self.id = id
         self._data = data
+        self._collection = collection
 
     def to_dict(self):
         return self._data
+
+    def set(self, data):
+        self._data = data
+        self._collection._set_key_val(self.id, data)

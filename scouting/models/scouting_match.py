@@ -9,3 +9,12 @@ class ScoutingMatch:
         # TODO: 2018 competition related scoring
 
         assert self.color in ["RED", "BLUE"]
+
+    def to_dict(self):
+        return {
+            "team_id": self.team_id,
+            "color": self.color,
+            "auton_score": self.auton_score,
+            "driver_score": self.driver_score,
+            "tournament_sku": self.tournament_sku
+        }

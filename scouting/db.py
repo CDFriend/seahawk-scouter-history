@@ -16,8 +16,8 @@ class Db:
 
     def get_events_for_team(self, team_id):
         """Get the SKUs of all events a team attended (or was scouted at)."""
-        docs = self._firebase.collection("teams").where("team_id", "==", team_id)
-        return [doc.id for doc in docs]
+        team = self._firebase.collection("teams").document(team_id).get().to_dict()
+        return [event_ref.id for event_ref in team["events"]]
 
     def get_all_events(self):
         """Get the SKUs of all events we've scouted."""
@@ -32,7 +32,7 @@ class Db:
     def get_matches_for_event_id(self, id):
         """Get match data for a given tournament ID."""
         docs = self._firebase.collection("matches_scouting")\
-                .where("tournament_sku", "==", id)
+                .where("tournament_sku", "==", id).get()
         return [ScoutingMatch(**doc.to_dict()) for doc in docs]
 
     def commit_transaction(self, trans: ScoutingTransaction):

@@ -1,5 +1,6 @@
 import re
 from scouting.utils import get_location_str
+from scouting.models.stats import Stats
 
 
 def validate_team_id(team_id):
@@ -19,6 +20,14 @@ class Team:
         self.country       = str(kwargs["country"])
         self.grade         = str(kwargs["grade"])
         self.is_registered = bool(kwargs["is_registered"])
+
+        if "stats" in kwargs:
+            self.stats = Stats(**kwargs["stats"])
+        else:
+            self.stats = None
+
+    def set_stats(self, stats: Stats):
+        self.stats = stats
 
     def get_location_str(self):
         return get_location_str(self.city, self.region, self.country)

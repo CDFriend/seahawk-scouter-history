@@ -1,6 +1,7 @@
 from flask import g
 
 from scouting.api.firebase import get_firestore
+from scouting.models.stats import Stats
 from scouting.models.scouting_match import ScoutingMatch
 from scouting.models.transaction import ScoutingTransaction
 
@@ -8,6 +9,11 @@ from scouting.models.transaction import ScoutingTransaction
 class Db:
     def __init__(self):
         self._firebase = get_firestore()
+
+    def get_team_stats(self, team_id):
+        """Get stats for a given team ID"""
+        doc = self._firebase.collection("teams").document(team_id)
+        return Stats(**doc.get().to_dict()["stats"])
 
     def get_scouted_teams(self):
         """Get the team IDs of all teams we've scouted."""

@@ -26,6 +26,9 @@ def team_info(team_id):
         abort(404)
         return
 
+    # Get team stats from firebase
+    team.set_stats(get_db().get_team_stats(team_id))
+
     # TODO: aiohttp-ize this
     event_skus = get_db().get_events_for_team(team_id)
     events = [get_vexdb().get_event_by_sku(sku) for sku in event_skus]

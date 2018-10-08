@@ -31,9 +31,19 @@ class Db:
 
     def get_matches_for_event_id(self, id):
         """Get match data for a given tournament ID."""
-        docs = self._firebase.collection("matches_scouting")\
-                .where("tournament_sku", "==", id).get()
-        return [ScoutingMatch(**doc.to_dict()) for doc in docs]
+        event = self._firebase.collection("events").document(id).get().to_dict()
+
+        # Convert firebase dictionary to our format
+        matches = []
+        for doc_ref in event["matches"]:
+            match_dict = doc_ref.get().to_dict()
+
+            # firebase DocumentReference -> string
+            match_dict["team_id"] = match_dict["team_id"].id
+
+            matches.append(ScoutingMatch(**match_dict))
+
+        return matches
 
     def commit_transaction(self, trans: ScoutingTransaction):
         for match in trans.matches:

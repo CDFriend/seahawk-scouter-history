@@ -8,3 +8,5 @@ __pycache__
 # IntelliJ (PyCharm)
 .idea
 
+# Firebase credentials SHOULD NOT be included
+google-credentials.json

@@ -1,14 +1,13 @@
 from flask import g
 
-# TODO: get actual firebase impl going
-from scouting.api.mock.firebase import Client
+from scouting.api.firebase import get_firestore
 from scouting.models.scouting_match import ScoutingMatch
 from scouting.models.transaction import ScoutingTransaction
 
 
 class Db:
     def __init__(self):
-        self._firebase = Client()
+        self._firebase = get_firestore()
 
     def get_scouted_teams(self):
         """Get the team IDs of all teams we've scouted."""
@@ -17,7 +16,7 @@ class Db:
 
     def get_events_for_team(self, team_id):
         """Get the SKUs of all events a team attended (or was scouted at)."""
-        docs = self._firebase.collection("events").where("team_id", "==", team_id)
+        docs = self._firebase.collection("teams").where("team_id", "==", team_id)
         return [doc.id for doc in docs]
 
     def get_all_events(self):
